@@ -1,3 +1,24 @@
+;;;; tab crap
+
+; use tabs in files (urgh...yelp!)
+(setq-default indent-tabs-mode t)
+
+; tab display width of 4 columns by default
+; (i'm trying everything i can think of to make this stick...)
+(setq-default tab-width 4)
+(setq-default c-basic-offset 4)
+(setq-default py-indent-offset 4)
+(setq-default py-smart-indentation nil)
+
+(defun fix_fucked_python_tabs()
+  (setq py-smart-indentation nil
+		tab-width 4
+		py-indent-offset 4
+		indent-tabs-mode t
+		python-indent 4))
+
+(add-hook 'python-mode-hook 'fix_fucked_python_tabs)
+
 ;;;; keybindings
 
 ; make ctrl-right go to end of line
