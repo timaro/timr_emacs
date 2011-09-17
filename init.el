@@ -65,13 +65,19 @@
   (font-lock-add-keywords
    nil
    `((,(concat "\\<\\(NULL"
-	       "\\|c\\(def\\|har\\|typedef\\)"
-	       "\\|e\\(num\\|xtern\\)"
-	       "\\|float"
-	       "\\|in\\(clude\\|t\\)"
-	       "\\|object\\|public\\|struct\\|type\\|union\\|void"
-	       "\\)\\>")
-      1 font-lock-keyword-face t))))
+		   "\\|c\\(def\\|har\\|typedef\\)"
+		   "\\|e\\(num\\|xtern\\)"
+		   "\\|float"
+		   "\\|in\\(clude\\|t\\)"
+		   "\\|object\\|public\\|struct\\|type\\|union\\|void"
+		   "\\)\\>")
+	  1 font-lock-keyword-face t))))
+
+;;;; javascript-mode.el for old versions of emacs (i.e. the one at yelp)
+
+(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
+(autoload 'javascript-mode "javascript.el" nil t)
 
 ;;;; python code-folding via outline-minor-mode
 
@@ -85,22 +91,38 @@
 (defun py-outline-level ()
   "Report outline level for Python outlining."
   (save-excursion
-    (end-of-line)
-    (let ((indentation (progn
+	(end-of-line)
+	(let ((indentation (progn
 			 (re-search-backward py-outline-regexp)
 			 (match-string-no-properties 1))))
-      (if (and (> (length indentation) 0)
-	       (string= "\t" (substring indentation 0 1)))
+	  (if (and (> (length indentation) 0)
+		   (string= "\t" (substring indentation 0 1)))
 	  (length indentation)
 	(/ (length indentation) py-indent-offset)))))
 
 (add-hook 'python-mode-hook
 	  '(lambda ()
-	     (outline-minor-mode 1)
-	     (setq
-	      outline-regexp py-outline-regexp
-	      outline-level 'py-outline-level)
+		 (outline-minor-mode 1)
+		 (setq
+		  outline-regexp py-outline-regexp
+		  outline-level 'py-outline-level)
 			 (hide-body)))
+
+;;;; cheetah mode (purty cheetah web templates)
+
+(define-derived-mode cheetah-mode html-mode "Cheetah"
+  (make-face 'cheetah-variable-face)
+  (font-lock-add-keywords
+   nil
+   '(
+	 ("\\(#\\(from\\|else\\|include\\|extends\\|set\\|def\\|import\\|for\\|if\\|end\\)+\\)\\>" 1 font-lock-type-face)
+	 ("\\(#\\(from\\|for\\|end\\)\\).*\\<\\(for\\|import\\|def\\|if\\|in\\)\\>" 3 font-lock-type-face)
+	 ("\\(##.*\\)\n" 1 font-lock-comment-face)
+	 ("\\(\\$\\(?:\\sw\\|}\\|{\\|\\s_\\)+\\)" 1 font-lock-variable-name-face))
+   )
+  (font-lock-mode 1)
+  )
+(setq auto-mode-alist (cons '( "\\.tmpl\\'" . cheetah-mode ) auto-mode-alist ))
 
 ;;;; outline-minor-mode keymappings
 
@@ -139,8 +161,8 @@
 (require 'color-theme)
 (eval-after-load "color-theme"
   '(progn
-     (color-theme-initialize)
-     (color-theme-hober)))
+	 (color-theme-initialize)
+	 (color-theme-hober)))
 
 ;;;; show column numbers and line numbers
 (column-number-mode 1)
@@ -150,7 +172,7 @@
 
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
-;;; ido mode
+;;;; ido mode
 
 (ido-mode 'both)                   ; enable for files and buffers
 (setq ido-enable-flex-matching t)  ; for fuzzy matching of characters
@@ -166,11 +188,11 @@
 (defun ido-sort-mtime ()
   (setq ido-temp-list
 	(sort ido-temp-list
-	      (lambda (a b)
+		  (lambda (a b)
 		(time-less-p
 		 (sixth (file-attributes (concat ido-current-directory b)))
 		 (sixth (file-attributes (concat ido-current-directory a)))))))
   (ido-to-end  ;; move . files to end (again)
    (delq nil (mapcar
-	      (lambda (x) (and (string-match-p "^\\.." x) x))
-	      ido-temp-list))))
+		  (lambda (x) (and (string-match-p "^\\.." x) x))
+		  ido-temp-list))))
