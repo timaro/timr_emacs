@@ -3,6 +3,9 @@
 ; use tabs in files (urgh...yelp!)
 (setq-default indent-tabs-mode t)
 
+; this var affects both visualization of whitespace, *and* the behavior of whitespace-cleanup.  beware!
+(setq-default whitespace-style '(trailing lines-tail empty space-before-tab::tab indentation::tab space-after-tab::tab))
+
 ; tab display width of 4 columns by default
 ; (i'm trying everything i can think of to make this stick...)
 (setq-default tab-width 4)
