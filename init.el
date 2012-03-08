@@ -16,11 +16,11 @@
 (setq-default whitespace-tab-width 4)
 
 (setq my-whitespace-style '(trailing
-			    lines-tail
-			    empty
-			    space-before-tab::tab
-			    indentation::tab
-			    space-after-tab::tab))
+				lines-tail
+				empty
+				space-before-tab::tab
+				indentation::tab
+				space-after-tab::tab))
 
 ; this var affects both visualization of whitespace, *and* the behavior of whitespace-cleanup.
 (setq-default whitespace-style my-whitespace-style)
@@ -204,3 +204,9 @@
    (delq nil (mapcar
 		  (lambda (x) (and (string-match-p "^\\.." x) x))
 		  ido-temp-list))))
+
+
+;; anything mode
+
+(add-to-list 'load-path "~/.emacs.d/anything-mode/")
+(require 'anything-config)
