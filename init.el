@@ -1,27 +1,29 @@
+;;;; python-mode.el config
+
+(add-to-list 'load-path "~/.emacs.d/python-mode.el-6.0.5/")
+(autoload 'python-mode "python-mode" "Python Mode." t)
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(add-to-list 'interpreter-mode-alist '("python" . python-mode))
+(setq py-shell-name "ipython")
+
 ;;;; tab crap
 
 ; use tabs in files (urgh...yelp!)
 (setq-default indent-tabs-mode t)
 
-; this var affects both visualization of whitespace, *and* the behavior of whitespace-cleanup.  beware!
-(setq-default whitespace-style '(trailing lines-tail empty space-before-tab::tab indentation::tab space-after-tab::tab))
-
 ; tab display width of 4 columns by default
-; (i'm trying everything i can think of to make this stick...)
 (setq-default tab-width 4)
-(setq-default whitespace-tab-wdith 4)
-(setq-default c-basic-offset 4)
-(setq-default py-indent-offset 4)
-(setq-default py-smart-indentation nil)
+(setq-default whitespace-tab-width 4)
 
-(defun fix_fucked_python_tabs()
-  (setq py-smart-indentation nil
-		tab-width 4
-		py-indent-offset 4
-		indent-tabs-mode t
-		python-indent 4))
+(setq my-whitespace-style '(trailing
+			    lines-tail
+			    empty
+			    space-before-tab::tab
+			    indentation::tab
+			    space-after-tab::tab))
 
-(add-hook 'python-mode-hook 'fix_fucked_python_tabs)
+; this var affects both visualization of whitespace, *and* the behavior of whitespace-cleanup.
+(setq-default whitespace-style my-whitespace-style)
 ; show whitespace fuckups when in python mode.
 (add-hook 'python-mode-hook 'whitespace-mode)
 
