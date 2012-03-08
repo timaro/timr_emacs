@@ -9,6 +9,7 @@
 ; tab display width of 4 columns by default
 ; (i'm trying everything i can think of to make this stick...)
 (setq-default tab-width 4)
+(setq-default whitespace-tab-wdith 4)
 (setq-default c-basic-offset 4)
 (setq-default py-indent-offset 4)
 (setq-default py-smart-indentation nil)
@@ -21,6 +22,8 @@
 		python-indent 4))
 
 (add-hook 'python-mode-hook 'fix_fucked_python_tabs)
+; show whitespace fuckups when in python mode.
+(add-hook 'python-mode-hook 'whitespace-mode)
 
 ;;;; keybindings
 
