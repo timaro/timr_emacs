@@ -8,24 +8,35 @@
 
 ;;;; tab crap
 
-; use tabs in files (urgh...yelp!)
-(setq-default indent-tabs-mode t)
+; by default, don't use tabs for indenting
+(setq-default indent-tabs-mode nil)
+
+(setq tabbed-whitespace-style '(trailing
+								lines-tail
+								space-before-tab::tab
+								indentation::tab
+								space-after-tab::tab))
+
+(setq untabbed-whitespace-style '(trailing
+								  lines-tail
+								  indentation))
+
+; this var affects both visualization of whitespace, *and* the behavior of whitespace-cleanup.
+(setq-default whitespace-style untabbed-whitespace-style)
+
+(defun py-tabs-mode-selector ()
+  (if (string-match "/pg/yelp-main/" (buffer-file-name))
+	  (setq
+	   indent-tabs-mode t
+	   whitespace-style tabbed-whitespace-style
+	   py-smart-indentation nil
+	   python-indent 4)))
+
+(add-hook 'python-mode-hook 'py-tabs-mode-selector)
 
 ; tab display width of 4 columns by default
 (setq-default tab-width 4)
 (setq-default whitespace-tab-width 4)
-
-(setq my-whitespace-style '(trailing
-				lines-tail
-				empty
-				space-before-tab::tab
-				indentation::tab
-				space-after-tab::tab))
-
-; this var affects both visualization of whitespace, *and* the behavior of whitespace-cleanup.
-(setq-default whitespace-style my-whitespace-style)
-; show whitespace fuckups when in python mode.
-(add-hook 'python-mode-hook 'whitespace-mode)
 
 ;;;; keybindings
 
