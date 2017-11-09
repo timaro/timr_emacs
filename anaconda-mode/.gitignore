@@ -1,0 +1,13 @@
+*.egg-info/
+*.elc
+*.pyc
+*~
+.cask/
+.cache/
+.coverage
+.tox/
+.vagrant/
+[#]*[#]
+__pycache__/
+build/
+dist/

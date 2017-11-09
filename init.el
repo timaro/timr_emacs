@@ -35,6 +35,18 @@
 ; make <home> go to start of doc
 (global-set-key (kbd "<home>") 'beginning-of-buffer)
 
+; make a custom occur regex for python, and bind it to something close to the default occur kb
+(defun py-occur ()
+  "run occur mode with a regex for python methods and classes"
+  (interactive)
+  (occur "\\(def\\|class\\)\\s-"))
+
+(global-set-key (kbd "M-s p") 'py-occur)
+
+;;;; anaconda mode
+
+(add-to-list 'load-path "~/.emacs.d/anaconda-mode")
+(add-hook 'python-mode-hook 'anaconda-mode)
 
 ;;;; `Pyrex' mode.
 
