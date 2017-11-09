@@ -1,6 +1,4 @@
 timr_emacs
 ==========
 
-my emacs config crap.
-
-I use these while I'm working on my [ruby documentation search](http://www.omniref.com) site, Omniref.com
+my emacs config crap. employers, this is how you can tell i'm a coding rockstar.
