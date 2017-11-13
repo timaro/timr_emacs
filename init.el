@@ -53,11 +53,6 @@
 
 (add-hook 'python-mode-hook 'highlight-indentation-mode)
 
-;;;; anaconda mode
-
-(add-to-list 'load-path "~/.emacs.d/anaconda-mode")
-(add-hook 'python-mode-hook 'anaconda-mode)
-
 ;;;; `Pyrex' mode.
 
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . pyrex-mode))
