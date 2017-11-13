@@ -43,6 +43,16 @@
 
 (global-set-key (kbd "M-s p") 'py-occur)
 
+;;;; highlight indentation mode
+
+(add-to-list 'load-path "~/.emacs.d/highlight-indentation")
+
+(require 'highlight-indentation)
+(set-face-background 'highlight-indentation-face "#222222")
+(set-face-background 'highlight-indentation-current-column-face "#444444")
+
+(add-hook 'python-mode-hook 'highlight-indentation-mode)
+
 ;;;; anaconda mode
 
 (add-to-list 'load-path "~/.emacs.d/anaconda-mode")
@@ -80,6 +90,10 @@
 ;;; cleanup whitespace before save
 
 (add-hook 'before-save-hook 'whitespace-cleanup)
+
+;;; confirm before close (prevent fat-finger errors)
+
+(setq confirm-kill-emacs 'y-or-n-p)
 
 ;;; ido mode
 
