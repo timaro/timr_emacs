@@ -69,15 +69,6 @@
 	       "\\)\\>")
       1 font-lock-keyword-face t))))
 
-;;;; color-theme init
-
-(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
-(require 'color-theme)
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-     (color-theme-hober)))
-
 ;;;; show column numbers and line numbers
 (column-number-mode 1)
 (line-number-mode 1)
