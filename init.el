@@ -43,6 +43,9 @@
 
 (global-set-key (kbd "M-s p") 'py-occur)
 
+;;; color theme path
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+
 ;;;; highlight indentation mode
 
 (add-to-list 'load-path "~/.emacs.d/highlight-indentation")
@@ -105,3 +108,16 @@
    (delq nil (mapcar
 	      (lambda (x) (and (string-match-p "^\\.." x) x))
 	      ido-temp-list))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("583148e87f779040b5349db48b6fcad6fe9a873c6ada20487e9a1ec40d845505" default)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
